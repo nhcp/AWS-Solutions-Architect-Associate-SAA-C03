@@ -1,40 +1,39 @@
 # SAA-C03 Chapter 1: Networking & Advanced VPC Architecture
 
-## 📖 1. Introduction
-This chapter covers how to build a secure and isolated network in the AWS Cloud. You will learn how to control who can enter your network, how to connect private servers to the internet safely, and how to link multiple global offices together.
-
 ---
 
-## 🧠 2. Foundation Theory
+## 🧠 1. Foundation Theory (The Basics)
 
-### What is a VPC?
+**What is a VPC?**
 A Virtual Private Cloud (VPC) is your own private network in the cloud. It is isolated from other users and belongs to one specific AWS Region.
 
-### Subnets: Public vs. Private
+**Subnets: Public vs. Private**
 * **Public Subnet:** Has a connection to the internet via an Internet Gateway. Use this for Load Balancers.
-* **Private Subnet:** No direct internet connection. Use this for Databases to keep them hidden from hackers.
+* **Private Subnet:** No direct internet connection. Use this for Databases to keep them hidden.
 
-### Security: SGs and NACLs
+**Security: SGs and NACLs**
 * **Security Group (SG):** A firewall for the server. It remembers who you let in (Stateful).
 * **Network ACL (NACL):** A firewall for the whole subnet. It does not remember traffic (Stateless).
 
 ---
 
-## 🏗️ 3. Advanced Theory
+## 🏗️ 2. Advanced Theory (Architect Level)
 
-### Connectivity Tools
-* **NAT Gateway:** Allows private servers to go "out" for updates but blocks incoming traffic.
-* **Gateway Endpoints:** Free tunnels for S3 and DynamoDB that keep traffic inside AWS.
-* **Interface Endpoints:** Paid tunnels for almost all other services using PrivateLink.
+**NAT Gateway**
+Lives in the Public Subnet. Allows private servers to go "out" for updates but blocks incoming traffic.
 
-### Global Connections
-* **VPC Peering:** A 1-to-1 bridge between two VPCs. It is not transitive.
-* **Transit Gateway:** A central hub to connect thousands of VPCs and offices.
-* **Direct Connect:** A physical fiber line from your office to AWS that bypasses the internet.
+**Gateway Endpoints**
+Free tunnels for S3 and DynamoDB that keep traffic inside the AWS network.
+
+**Interface Endpoints**
+Paid tunnels for almost all other services using PrivateLink technology.
+
+**Transit Gateway**
+A central hub to connect thousands of VPCs and offices together in a "hub-and-spoke" model.
 
 ---
 
-## 🏗️ 4. Architecture Scenarios
+## 🏗️ 3. Architecture Scenarios
 
 | # | Business Requirement | Architect Solution |
 | :--- | :--- | :--- |
@@ -51,7 +50,7 @@ A Virtual Private Cloud (VPC) is your own private network in the cloud. It is is
 
 ---
 
-## 🤝 5. 20 Priority Interview Q&A
+## 🤝 4. 20 Priority Interview Q&A (Spaced for Study)
 
 1. **Question:** What is a VPC?
 **Answer:** A logically isolated virtual network within an AWS Region.
@@ -115,7 +114,7 @@ A Virtual Private Cloud (VPC) is your own private network in the cloud. It is is
 
 ---
 
-## 🛠️ 6. 10 Hands-on Lab Tasks
+## 🛠️ 5. 10 Hands-on Lab Tasks
 
 **Lab 1:** Design a network where a database can get updates but is totally hidden from the internet.
 <br><br><br><br><br>
@@ -149,9 +148,9 @@ A Virtual Private Cloud (VPC) is your own private network in the cloud. It is is
 
 ---
 
-## 🔧 7. Lab Solutions & Step-by-Step Instructions
+## 🔧 6. Lab Solutions & Step-by-Step Instructions
 
-**Solution 1:** Create NAT Gateway in Public Subnet. Add Route `0.0.0.0/0` -> NAT Gateway in Private Route Table.
+**Solution 1:** Create NAT Gateway in Public Subnet. Add Route `0.0.0.0/0` targeting NAT Gateway in the Private Route Table.
 
 **Solution 2:** Create an S3 Gateway Endpoint and associate it with your Private Route Tables.
 
